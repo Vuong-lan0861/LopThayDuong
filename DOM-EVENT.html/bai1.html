@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bai1</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+    }
+    .container {
+        text-align: center;
+    }
+
+    h2 {
+        color: #008000;
+    }
+
+    button {
+        background-color: #008000;
+        color: white;
+        border-radius: 5px;
+    }
+
+    input {
+        border-radius: 5px;
+    }
+
+    p {
+        color: red;
+        font-size: 15px;
+    }
+
+    #numbers {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        flex-wrap: wrap;
+        width: 100vw;
+        padding: 18px 36px;
+
+    }
+
+    #numbers div {
+        padding: 8px;
+        
+    }
+
+    .soChan {
+        background-color: #90EE90;
+    }
+
+    .soLe {
+        background-color: #FFFC05;
+    }
+
+    .soNguyenTo {
+        background-color: #FF1300;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h2>Generate Number</h2>
+        <h5>RIKKEI ACADEMY FUKUOKA</h5>
+
+        <dir class="content">
+            <p id="validate"></p>
+            <input type="text" id="input">
+            <button onclick="hienThi()" id="btn">
+                Generator Number
+            </button>
+        </dir>
+        <div id="numbers"></div>
+    </div>
+    <script>
+        let input = document.getElementById("input");
+        let pText = document.getElementById("validate");
+
+        function hienThi() {
+            let inputValue = input.value;
+
+            if (inputValue === "" || isNaN(inputValue)) {
+
+                pText.textContent = `Hãy nhập 1 chữ số vào inputValue`;
+            }
+            else if (inputValue <= 0) {
+                pText.textContent = `Hãy nhập 1 chữ số lớn hơn 0`;
+            }
+            else {
+                soNguyenDuong(inputValue);
+            }
+        }
+
+        function soNguyenDuong(inputValue) {
+            let numbers = document.getElementById("numbers");
+            numbers.innerHTML = ``;
+
+            for (let i = 1; i <= inputValue; i++) {
+                let numberDiv = document.createElement("div");
+                numberDiv.textContent = i;
+
+                if (i % 2 === 0) {
+                    numberDiv.classList.add("soChan");
+                    // numberDiv.style.background = "#90EE90";
+                }
+                else {
+                    numberDiv.classList.add("soLe");
+                }
+                if (soNguyenTo(i)) {
+                    numberDiv.classList.add("soNguyenTo");
+                }
+                numbers.appendChild(numberDiv);
+
+            }
+        }
+        function soNguyenTo(n) {
+            console.log(n);
+            // Biến cờ hiệu
+            var flag = true;
+
+            // Nếu n bé hơn 2 tức là không phải số nguyên tố
+            if (n < 2) {
+                flag = false;
+            }
+            else {
+                // lặp từ 2 tới n-1
+                for (var j = 2; j < n - 1; j++) {
+                    if (n % j == 0) {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+
+            // Kiểm tra biến flag
+            if (flag == true) {
+                console.log(n + " là số nguyên tố <br/>");
+            }
+            else {
+
+                console.log(n + " không phải là số nguyên tố <br/>");
+            }
+            return flag;
+        }
+
+    </script>
+
+</body>
+
+</html>
